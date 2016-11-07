@@ -18,4 +18,5 @@ return [
     'DoctrineModule',
     'DoctrineORMModule',
     'Application',
+    'TimeLogger',
 ];

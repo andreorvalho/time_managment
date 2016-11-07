@@ -1,6 +1,6 @@
 <?php
 
-namespace Album;
+namespace TimeLogger;
 
 use Zend\Router\Http\Segment;
 
