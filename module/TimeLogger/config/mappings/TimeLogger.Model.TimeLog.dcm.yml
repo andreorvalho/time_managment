@@ -1,0 +1,18 @@
+TimeLogger\Model\TimeLog:
+  type: entity
+  table: timelogs
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    started:
+      type: datetime
+    finished:
+      type: datetime
+  manyToOne:
+    project:
+      targetEntity: Project
+      inversedBy: timeLogs
+

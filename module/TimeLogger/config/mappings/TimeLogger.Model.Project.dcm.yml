@@ -1,0 +1,15 @@
+TimeLogger\Model\Project:
+  type: entity
+  table: projects
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+  oneToMany:
+    timeLogs:
+      targetEntity: TimeLog
+      mappedBy: project

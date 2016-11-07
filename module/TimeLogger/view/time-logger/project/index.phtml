@@ -1,0 +1,48 @@
+<?php
+$title = 'My Projects';
+$this->headTitle($title);
+?>
+<?php
+// This provides a default CSS class and placeholder text for the title element:
+$projectName = $form->get('name');
+$projectName->setAttribute('class', 'form-control');
+$projectName->setAttribute('placeholder', 'Name');
+
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->setAttribute('action', $this->url('projects', ['action' => 'create']));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+
+<div class="form-group">
+    <?= $this->formLabel($projectName) ?>
+    <?= $this->formElement($projectName) ?>
+    <?= $this->formElementErrors()->render($projectName, ['class' => 'help-block']) ?>
+</div>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($form->get('id'));
+echo $this->form()->closeTag();
+?>
+
+<h1><?= $this->escapeHtml($title) ?></h1>
+
+<table class="table">
+<tr>
+    <th>Time Spent</th>
+    <th>&nbsp;</th>
+</tr>
+
+<?php foreach ($projects as $project) : ?>
+    <tr>
+        <td><?= $this->escapeHtml($project->CalculateHours()) ?></td>
+        <td>
+          actions
+        </td>
+    </tr>
+<?php endforeach; ?>
+</table>

@@ -5,6 +5,7 @@ namespace TimeLogger;
 use Zend\Router\Http\Segment;
 
 return [
+
     'router' => [
         'routes' => [
             'projects' => [
@@ -33,9 +34,10 @@ return [
     'doctrine' => [
         'driver' => [
             __NAMESPACE__ . '_driver' => [
-                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'class' => 'Doctrine\ORM\Mapping\Driver\YamlDriver',
                 'cache' => 'array',
-                'paths' => [__DIR__ . '/../src/Model']
+                'extension' => '.dcm.yml',
+                'paths' => [__DIR__ . '/mappings']
             ],
             'orm_default' => [
                 'drivers' => [
