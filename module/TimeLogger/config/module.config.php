@@ -42,6 +42,16 @@ return [
                 ],
                 'may_terminate' => false,
                 'child_routes' => [
+                    'update' => [
+                        'type' => 'literal',
+                        'options' => [
+                            'route' => '/update',
+                            'defaults' => [
+                                'controller' => Controller\ProjectController::class,
+                                'action'     => 'update',
+                            ],
+                        ],
+                    ],
                     'timelogs' => [
                         'type' => 'literal',
                         'options' => [

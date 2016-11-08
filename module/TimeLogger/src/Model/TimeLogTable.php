@@ -15,10 +15,15 @@ class TimeLogTable
         $this->entityManager = $em;
     }
 
-    public function fetchAll()
+    public function saveTimeLog(TimeLog $timeLog)
     {
-        $timeLogRepository = $this->entityManager->getRepository('TimeLogger\Model\TimeLog');
-        return $timeLogRepository->findAll();
+        $id = (int) $timeLog->getId();
+
+        if ($id === 0) {
+            $this->entityManager->persist($timeLog);
+        }
+
+        $this->entityManager->flush();
     }
 
     public function saveTimeLog(TimeLog $timeLog)

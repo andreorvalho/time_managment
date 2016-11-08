@@ -11,8 +11,8 @@ TimeLogger\Model\TimeLog:
       type: datetime
     finished:
       type: datetime
+      nullable: TRUE
   manyToOne:
     project:
       targetEntity: Project
       inversedBy: timeLogs
-

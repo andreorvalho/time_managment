@@ -121,6 +121,9 @@ class TimeLog
 
     public function timeSpent()
     {
+        if (!isset($this->finished)) {
+            $this->finished = new \DateTime();
+        }
         $diff = $this->finished->diff($this->started);
 
         $hours = $diff->h;

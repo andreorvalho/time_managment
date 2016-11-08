@@ -23,13 +23,7 @@ class TimeLogController extends AbstractActionController
 
     public function indexAction()
     {
-        $projectId = (int) $this->params()->fromRoute('project_id', 0);
-
-        if (!$projectId) {
-            return $this->redirect()->toRoute('projects');
-        }
-
-        $project = $this->projectTable->getProject($projectId);
+        $project = $this->getProject();
 
         return new ViewModel([
             'timelogs' => $project->getTimeLogs(),
@@ -40,13 +34,7 @@ class TimeLogController extends AbstractActionController
 
     public function createAction()
     {
-        $projectId = (int) $this->params()->fromRoute('project_id', 0);
-
-        if (!$projectId) {
-            return $this->redirect()->toRoute('projects');
-        }
-
-        $project = $this->projectTable->getProject($projectId);
+        $project = $this->getProject();
 
         $form = new TimeLogForm();
         $form->get('submit')->setValue('Add');
@@ -81,13 +69,7 @@ class TimeLogController extends AbstractActionController
 
     public function newAction()
     {
-        $projectId = (int) $this->params()->fromRoute('project_id', 0);
-
-        if (!$projectId) {
-            return $this->redirect()->toRoute('projects');
-        }
-
-        $project = $this->projectTable->getProject($projectId);
+        $project = $this->getProject();
 
         $form = new TimeLogForm();
         $form->get('submit')->setValue('Add');
@@ -98,4 +80,9 @@ class TimeLogController extends AbstractActionController
         ]);
     }
 
+    private function getProject()
+    {
+        $projectId = (int) $this->params()->fromRoute('project_id', 0);
+        return $this->projectTable->getProject($projectId);
+    }
 }

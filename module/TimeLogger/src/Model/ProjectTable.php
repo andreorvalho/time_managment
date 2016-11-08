@@ -5,6 +5,7 @@ namespace TimeLogger\Model;
 use RuntimeException;
 use Doctrine\ORM\EntityManager;
 use TimeLogger\Model\Project;
+use TimeLogger\Model\TimeLog;
 
 class ProjectTable
 {
@@ -44,6 +45,21 @@ class ProjectTable
             $this->entityManager->persist($project);
         }
 
+        foreach ( $project->getTimeLogs() as $timelog){
+            $this->entityManager->persist($timelog);
+        }
+
         $this->entityManager->flush();
+    }
+
+    public function getProjectsOpenTimeLog(Project $project)
+    {
+        $id = (int) $project->getId();
+
+        $dql = "SELECT t FROM TimeLogger\Model\TimeLog t JOIN t.project p WHERE t.finished IS NULL AND p.id = ?1";
+
+        return $this->entityManager->createQuery($dql)
+                             ->setParameter(1, $id)
+                             ->getResult();
     }
 }
