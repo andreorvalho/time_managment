@@ -15,12 +15,17 @@
             ->prependStylesheet($this->basePath('css/style.css'))
             ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
             ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+            ->appendStylesheet($this->basePath('css/bootstrap-datetimepicker.min.css'))
+
         ?>
 
         <!-- Scripts -->
         <?= $this->headScript()
             ->prependFile($this->basePath('js/bootstrap.min.js'))
+            ->prependFile($this->basePath('js/moment.min.js'))
             ->prependFile($this->basePath('js/jquery-3.1.0.min.js'))
+            ->appendFile($this->basePath('js/bootstrap-datetimepicker.min.js'))
+            ->appendFile($this->basePath('js/datepicker.js'))
         ?>
     </head>
     <body>
