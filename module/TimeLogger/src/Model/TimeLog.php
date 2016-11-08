@@ -110,7 +110,7 @@ class TimeLog
         return $this->project;
     }
 
-    public function time_spent()
+    public function timeSpent()
     {
         $diff = $this->finished->diff($this->started);
 

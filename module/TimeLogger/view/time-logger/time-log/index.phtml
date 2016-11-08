@@ -1,0 +1,28 @@
+<?php
+$title = 'Time logs for project: ' . $project_name;
+$this->headTitle($title);
+?>
+
+<h1><?= $this->escapeHtml($title) ?></h1>
+
+<a href="<?= $this->url('project/timelogs/new', ['project_id' => $project->getId()]) ?>">
+    Add Timelog
+</a>
+
+<table class="table">
+
+<tr>
+    <th>Time Started:</th>
+    <th>Time Finished:</th>
+    <th>Total of hours:</th>
+    <th>&nbsp;</th>
+</tr>
+
+<?php foreach ($timelogs as $timelog) : ?>
+    <tr>
+        <td> <?= $this->escapeHtml($timelog->getStarted()) ?> </td>
+        <td> <?= $this->escapeHtml($timelog->getFinished()) ?> </td>
+        <td> <?= $this->escapeHtml($timelog->timeSpent()) ?> Hours </td>
+    </tr>
+<?php endforeach; ?>
+</table>

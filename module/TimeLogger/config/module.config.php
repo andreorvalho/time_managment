@@ -9,16 +9,48 @@ return [
     'router' => [
         'routes' => [
             'projects' => [
-                'type'    => Segment::class,
+                'type'    => 'literal',
                 'options' => [
-                    'route' => '/projects[/:action[/:id]]',
-                    'constraints' => [
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id'     => '[0-9]+',
-                    ],
+                    'route' => '/projects',
                     'defaults' => [
                         'controller' => Controller\ProjectController::class,
                         'action'     => 'index',
+                    ],
+                ],
+            ],
+
+            'project' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route' => '/project[/:project_id]',
+                    'constraints' => [
+                        'project_id' => '[0-9]+',
+                    ],
+                ],
+                'may_terminate' => false,
+                'child_routes' => [
+                    'timelogs' => [
+                        'type' => 'literal',
+                        'options' => [
+                            'route' => '/timelogs',
+                            'defaults' => [
+                                'controller' => Controller\TimeLogController::class,
+                                'action'     => 'index',
+                            ],
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'new' => [
+                                'type' => 'literal',
+                                'options' => [
+                                    'route' => '/new',
+                                    'defaults' => [
+                                        'controller' => Controller\TimeLogController::class,
+                                        'action'     => 'new',
+                                    ],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ],

@@ -110,10 +110,10 @@ class Project
         return $this->timeLogs;
     }
 
-    public function CalculateHours()
+    public function calculateHours()
     {
         $time_spent = array_map(function($timeLog){
-                                return $timeLog->time_spent();
+                                return $timeLog->timeSpent();
                                 }, $this->timeLogs->toArray());
 
         return array_sum($time_spent);

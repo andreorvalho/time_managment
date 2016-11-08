@@ -36,6 +36,13 @@ class Module implements ConfigProviderInterface
                         $container->get(Model\ProjectTable::class)
                     );
                 },
+
+                Controller\TimeLogController::class => function($container) {
+                    return new Controller\TimeLogController(
+                        $container->get(Model\TimeLogTable::class),
+                        $container->get(Model\ProjectTable::class)
+                    );
+                },
             ],
         ];
     }

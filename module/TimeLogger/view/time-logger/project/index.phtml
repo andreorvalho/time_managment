@@ -39,9 +39,11 @@ echo $this->form()->closeTag();
 
 <?php foreach ($projects as $project) : ?>
     <tr>
-        <td><?= $this->escapeHtml($project->CalculateHours()) ?></td>
+        <td><?= $this->escapeHtml($project->calculateHours()) ?> Hours</td>
         <td>
-          actions
+          <a href="<?= $this->url('project/timelogs/new', ['project_id' => $project->getId()]) ?>">
+            Add Timelog
+          </a>
         </td>
     </tr>
 <?php endforeach; ?>

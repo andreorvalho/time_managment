@@ -21,6 +21,21 @@ class ProjectTable
         return $projectRepository->findAll();
     }
 
+    public function getProject($id)
+    {
+        $id = (int) $id;
+
+        $project = $this->entityManager->find("TimeLogger\Model\Project", $id);
+
+        if (! $project) {
+            throw new RuntimeException(sprintf(
+                'Could not find project with identifier %d', $id
+            ));
+        }
+
+        return $project;
+    }
+
     public function saveProject(Project $project)
     {
         $id = (int) $project->getId();
