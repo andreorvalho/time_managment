@@ -8,7 +8,7 @@ use TimeLogger\Model\TimeLog;
 use TimeLogger\Form\TimeLogForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Zend\Debug\Debug;
+
 
 class TimeLogController extends AbstractActionController
 {

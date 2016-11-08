@@ -20,7 +20,6 @@ class ProjectController extends AbstractActionController
     public function indexAction()
     {
         $form = new ProjectForm();
-        $form->get('submit')->setValue('Add');
 
         return new ViewModel([
             'projects' => $this->table->fetchAll(),

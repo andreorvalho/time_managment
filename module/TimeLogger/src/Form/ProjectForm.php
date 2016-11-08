@@ -21,14 +21,19 @@ class ProjectForm extends Form
             'options' => [
                 'label' => 'Name',
             ],
+            'attributes' => [
+                'placeholder' => 'Name',
+                'class' => 'form-control',
+            ],
         ]);
 
         $this->add([
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => [
-                'value' => 'Go',
+                'value' => 'Add Project',
                 'id'    => 'submitbutton',
+                'class' => 'btn btn-primary',
             ],
         ]);
     }

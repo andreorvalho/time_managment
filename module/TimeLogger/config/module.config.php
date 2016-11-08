@@ -17,6 +17,19 @@ return [
                         'action'     => 'index',
                     ],
                 ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'create' => [
+                        'type' => 'literal',
+                        'options' => [
+                            'route' => '/create',
+                            'defaults' => [
+                                'controller' => Controller\ProjectController::class,
+                                'action'     => 'create',
+                            ],
+                        ],
+                    ],
+                ],
             ],
 
             'project' => [

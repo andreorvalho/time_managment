@@ -2,49 +2,59 @@
 $title = 'My Projects';
 $this->headTitle($title);
 ?>
-<?php
-// This provides a default CSS class and placeholder text for the title element:
-$projectName = $form->get('name');
-$projectName->setAttribute('class', 'form-control');
-$projectName->setAttribute('placeholder', 'Name');
 
-$submit = $form->get('submit');
-$submit->setAttribute('class', 'btn btn-primary');
+<div class="container">
+    <div class="row">
+        <div class='col-sm-12'>
+            <h1><?= $this->escapeHtml($title) ?></h1>
+        </div>
+        <div class='col-sm-12'>
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Time Spent</th>
+                    <th>Actions</th>
+                </tr>
 
-$form->setAttribute('action', $this->url('projects', ['action' => 'create']));
-$form->prepare();
+                <?php foreach ($projects as $project) : ?>
+                    <tr>
+                        <td><?= $this->escapeHtml($project->getName()) ?> </td>
+                        <td><?= $this->escapeHtml($project->calculateHours()) ?> Hours</td>
+                        <td>
+                          <a href="<?= $this->url('project/timelogs/new', ['project_id' => $project->getId()]) ?>">
+                            Add Timelog
+                          </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
+    </div>
 
-echo $this->form()->openTag($form);
-?>
+    <div class="row">
+        <div class='col-sm-4'>
+            <?php
+            $projectName = $form->get('name');
 
-<div class="form-group">
-    <?= $this->formLabel($projectName) ?>
-    <?= $this->formElement($projectName) ?>
-    <?= $this->formElementErrors()->render($projectName, ['class' => 'help-block']) ?>
+            $submit = $form->get('submit');
+
+            $form->setAttribute('action', $this->url('projects/create'));
+            $form->prepare();
+
+            echo $this->form()->openTag($form);
+            ?>
+
+            <div class="form-group">
+                <?= $this->formElementErrors()->render($projectName, ['class' => 'help-block']) ?>
+                <?= $this->formLabel($projectName) ?>
+                <?= $this->formElement($projectName) ?>
+            </div>
+
+            <?php
+            echo $this->formSubmit($submit);
+            echo $this->formHidden($form->get('id'));
+            echo $this->form()->closeTag();
+            ?>
+        </div>
+    </div>
 </div>
-
-<?php
-echo $this->formSubmit($submit);
-echo $this->formHidden($form->get('id'));
-echo $this->form()->closeTag();
-?>
-
-<h1><?= $this->escapeHtml($title) ?></h1>
-
-<table class="table">
-<tr>
-    <th>Time Spent</th>
-    <th>&nbsp;</th>
-</tr>
-
-<?php foreach ($projects as $project) : ?>
-    <tr>
-        <td><?= $this->escapeHtml($project->calculateHours()) ?> Hours</td>
-        <td>
-          <a href="<?= $this->url('project/timelogs/new', ['project_id' => $project->getId()]) ?>">
-            Add Timelog
-          </a>
-        </td>
-    </tr>
-<?php endforeach; ?>
-</table>
