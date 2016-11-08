@@ -25,15 +25,4 @@ class TimeLogTable
 
         $this->entityManager->flush();
     }
-
-    public function saveTimeLog(TimeLog $timeLog)
-    {
-        $id = (int) $timeLog->getId();
-
-        if ($id === 0) {
-            $this->entityManager->persist($timeLog);
-        }
-
-        $this->entityManager->flush();
-    }
 }
