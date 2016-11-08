@@ -19,27 +19,29 @@ class ProjectController extends AbstractActionController
 
     public function indexAction()
     {
-        $form = new ProjectForm();
-
         return new ViewModel([
             'projects' => $this->table->fetchAll(),
-            'form' => $form,
+            'form' => new ProjectForm(),
         ]);
     }
 
     public function createAction()
     {
         $form = new ProjectForm();
-        $form->get('submit')->setValue('Add');
-
         $request = $this->getRequest();
-
         $project = new Project();
+
         $form->setInputFilter($project->getInputFilter());
         $form->setData($request->getPost());
 
         if (! $form->isValid()) {
-            return ['form' => $form];
+            $view = new ViewModel([
+                'projects' => $this->table->fetchAll(),
+                'form' => $form,
+            ]);
+
+            $view->setTemplate('time-logger/project/index');
+            return $view;
         }
 
         $project->exchangeArray($form->getData());

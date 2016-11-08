@@ -155,8 +155,8 @@ class Project
                     'name' => StringLength::class,
                     'options' => [
                         'encoding' => 'UTF-8',
-                        'min' => 1,
-                        'max' => 100,
+                        'min' => 5,
+                        'max' => 20,
                     ],
                 ],
             ],

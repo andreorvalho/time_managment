@@ -10,6 +10,8 @@ class ProjectForm extends Form
     {
         parent::__construct('project');
 
+        $this->setAttribute('class', 'form-inline');
+
         $this->add([
             'name' => 'id',
             'type' => 'hidden',
@@ -19,7 +21,7 @@ class ProjectForm extends Form
             'name' => 'name',
             'type' => 'text',
             'options' => [
-                'label' => 'Name',
+                'label' => 'Name:',
             ],
             'attributes' => [
                 'placeholder' => 'Name',
