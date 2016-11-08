@@ -40,10 +40,11 @@ $this->headTitle($title);
 								Add Timelog |
 							</a>
 							<a href="<?= $this->url('project/update', ['project_id' => $project->getId()]) ?>">
-								Start |
-							</a>
-							<a href="<?= $this->url('project/update', ['project_id' => $project->getId()]) ?>">
-								Stop
+								<?php if ($project->has_started()) : ?>
+									Stop
+								<?php else: ?>
+									Start
+								<?php endif; ?>
 							</a>
 						</td>
 					</tr>

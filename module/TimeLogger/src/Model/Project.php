@@ -11,7 +11,6 @@ use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\Validator\StringLength;
 
-
 /**
  * Project
  */
@@ -180,6 +179,14 @@ class Project
     public function getArrayCopy()
     {
         return get_object_vars($this);
+    }
+
+    public function has_started()
+    {
+        $finished = array_map(function($timeLog){
+                                return $timeLog->getFinished();
+                                }, $this->getTimeLogs()->toArray());
+        return in_array(NULL, $finished);
     }
 }
 

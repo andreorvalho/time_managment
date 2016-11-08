@@ -8,7 +8,6 @@ use TimeLogger\Model\TimeLog;
 use TimeLogger\Form\ProjectForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Zend\Debug\Debug;
 use Zend\Mvc\Plugin\FlashMessenger;
 
 class ProjectController extends AbstractActionController

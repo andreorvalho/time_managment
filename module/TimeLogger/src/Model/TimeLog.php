@@ -122,9 +122,12 @@ class TimeLog
     public function timeSpent()
     {
         if (!isset($this->finished)) {
-            $this->finished = new \DateTime();
+            $finished = new \DateTime();
         }
-        $diff = $this->finished->diff($this->started);
+        else{
+            $finished = $this->finished;
+        }
+        $diff = $finished->diff($this->started);
 
         $hours = $diff->h;
         $hours = $hours + ($diff->days*24);
