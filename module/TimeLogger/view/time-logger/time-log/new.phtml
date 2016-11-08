@@ -1,0 +1,55 @@
+<?php
+$title = 'New Time Log for project';
+$this->headTitle($title);
+?>
+<?php
+
+$timeLogStarted = $form->get('started');
+$timeLogFinished = $form->get('finished');
+
+$submit = $form->get('submit');
+
+$form->setAttribute('action', $this->url('project/timelogs/create', ['project_id' => $project->getId()]));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+
+<div class="container">
+    <div class="row">
+        <div class='col-sm-6'>
+            <?= $this->formLabel($timeLogStarted) ?>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <?= $this->formElement($timeLogStarted) ?>
+
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <?= $this->formElementErrors()->render($timeLogStarted, ['class' => 'help-block']) ?>
+        </div>
+      </div>
+     <div class="row">
+        <div class='col-sm-6'>
+            <?= $this->formLabel($timeLogFinished) ?>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker2'>
+                    <?= $this->formElement($timeLogFinished) ?>
+
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <?= $this->formElementErrors()->render($timeLogFinished, ['class' => 'help-block']) ?>
+        </div>
+    </div>
+</div>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($form->get('id'));
+echo $this->form()->closeTag();
+?>

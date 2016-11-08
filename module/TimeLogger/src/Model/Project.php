@@ -119,7 +119,7 @@ class Project
         return array_sum($time_spent);
     }
 
-     public function setInputFilter(InputFilterInterface $inputFilter)
+    public function setInputFilter(InputFilterInterface $inputFilter)
     {
         throw new DomainException(sprintf(
             '%s does not allow injection of an alternate input filter',

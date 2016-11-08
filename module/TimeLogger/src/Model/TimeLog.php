@@ -2,6 +2,14 @@
 
 namespace TimeLogger\Model;
 
+use DomainException;
+use Zend\Filter\ToInt;
+
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+
+
 /**
  * TimeLog
  */
@@ -27,6 +35,7 @@ class TimeLog
      */
     protected $project;
 
+    private $inputFilter;
 
     /**
      * Get id
@@ -117,6 +126,61 @@ class TimeLog
         $hours = $diff->h;
         $hours = $hours + ($diff->days*24);
         return $hours;
+    }
+
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new DomainException(sprintf(
+            '%s does not allow injection of an alternate input filter',
+            __CLASS__
+        ));
+    }
+
+    public function getInputFilter()
+    {
+        if ($this->inputFilter) {
+            return $this->inputFilter;
+        }
+
+        $inputFilter = new InputFilter();
+
+        $inputFilter->add([
+            'name' => 'id',
+            'required' => true,
+            'filters' => [
+                ['name' => ToInt::class],
+            ],
+        ]);
+
+        $inputFilter->add([
+            'name' => 'started',
+            'required' => true,
+        ]);
+
+        $inputFilter->add([
+            'name' => 'finished',
+            'required' => true,
+        ]);
+
+        $this->inputFilter = $inputFilter;
+        return $this->inputFilter;
+    }
+
+    public function exchangeArray(array $data)
+    {
+        $this->id = $data['id'];
+        $this->started = $data['started'];
+        $this->finished = $data['finished'];
+    }
+
+    /**
+     * Convert the object to an array.
+     *
+     * @return array
+     */
+    public function getArrayCopy()
+    {
+        return get_object_vars($this);
     }
 }
 

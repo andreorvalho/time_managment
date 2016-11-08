@@ -5,7 +5,7 @@ if (typeof jQuery === 'undefined') {
 +function ($) {
   $(document).ready(function() {
       $('#datetimepicker1').datetimepicker();
-      console.log("sdasdas");
+      $('#datetimepicker2').datetimepicker();
   });
 }(jQuery);
 

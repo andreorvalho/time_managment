@@ -50,6 +50,17 @@ return [
                                     ],
                                 ],
                             ],
+
+                            'create' => [
+                                'type' => 'literal',
+                                'options' => [
+                                    'route' => '/create',
+                                    'defaults' => [
+                                        'controller' => Controller\TimeLogController::class,
+                                        'action'     => 'create',
+                                    ],
+                                ],
+                            ],
                         ],
                     ],
                 ],
