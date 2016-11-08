@@ -9,6 +9,7 @@ use TimeLogger\Form\ProjectForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Debug\Debug;
+use Zend\Mvc\Plugin\FlashMessenger;
 
 class ProjectController extends AbstractActionController
 {
@@ -62,12 +63,16 @@ class ProjectController extends AbstractActionController
             $timelog->setProject($project);
             $project->addTimeLog($timelog);
             $this->table->saveProject($project);
+
+            $this->flashMessenger()->addMessage('Project ' . $project->getName() . ' has started');
         }
         else{
             foreach ($timelogs as $timelog){
                 $date = new \DateTime();
-                $timelog->exchangeArray(['id' => $timelog->getId(), 'started' => $timelog->getStarted(), 'finished' => $date]);
+                $array = ['id' => $timelog->getId(), 'started' => $timelog->getStarted(), 'finished' => $date];
+                $timelog->exchangeArray($array);
                 $this->table->saveProject($project);
+                $this->flashMessenger()->addMessage('Project ' . $project->getName() . ' has stoped');
             }
         }
         return $this->redirect()->toRoute('projects');
